@@ -1,7 +1,5 @@
 // validate.js
 
-// validate.js
-
 // 공통으로 사용되는 유효성 검사 함수
 function validatePassword(password) {
   // 길이 검사 (최소 8자, 최대 20자)
@@ -61,4 +59,9 @@ function validatePassword(password) {
   };
 }
 
-module.exports = { validatePassword };
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+module.exports = { validatePassword, validateEmail };
