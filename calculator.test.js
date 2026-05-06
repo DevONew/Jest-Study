@@ -27,7 +27,7 @@ describe("calculator 함수", () => {
     })
 
     describe("calculateDiscountedPrice 함수", () => {
-        
+
         test("20% 할인 적용 시 올바른 결과를 반환하는지 확인", () => {
         expect(calculateDiscountedPrice(100, 20)).toBe(80);
         });
@@ -41,9 +41,23 @@ describe("calculator 함수", () => {
         });
 
         test("음수 할인에 대해 오류를 발생시키는지 확인", () => {
-        expect(() => calculateDiscountedPrice(100, -10)).toThrow(
-            "입력값이 유효하지 않습니다. 가격과 할인율은 0 이상이어야 하며, 할인율은 100 이하이어야 합니다."
-        );
+            // Arrange
+            const price = 100;
+            const negativeDiscountPercent = -10;
+            
+            // Act & Assert (예외를 테스트할 때는 Act와 Assert가 종종 결합됨)
+            expect(() => calculateDiscountedPrice(price, negativeDiscountPercent)).toThrow(
+                "입력값이 유효하지 않습니다. 가격과 할인율은 0 이상이어야 하며, 할인율은 100 이하이어야 합니다."
+            );
+
+            // 또는 Act 
+            // const errorDiscountedPrice = () => calculateDiscountedPrice(price, negativeDiscountPercent);
+
+            // Assert
+            // expect(errorDiscountedPrice.toThrow(
+            //     "입력값이 유효하지 않습니다. 가격과 할인율은 0 이상이어야 하며, 할인율은 100 이하이어야 합니다."
+            // ));
+
         });
     })
 
