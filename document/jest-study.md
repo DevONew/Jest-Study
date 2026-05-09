@@ -105,3 +105,57 @@ test("함수가 에러를 발생시켜야 함", () => {
 `expect(throwError).toThrow();` : 인자가 없을 때만 가능
 `expect(() => throwError()).toThrow("에러가 발생했습니다.");` : 인자 없을때 있을때 둘다 가능
 
+## 테스트 구조화
+
+### describe로 구조화하기 
+
+`describe("", () =>{})` 로 테스트를 묶을 수 있다. 중첩 가능.  
+describe()밖에 있는 test는 위치 상관없이 describe보다 먼저 실행되니 구조화를 주의 할것. (Jest 공식 동작)
+
+### AAA 패턴으로 구조화 하기 
+
+AAA 패턴은 테스트 코드를 구조화 할수 있다. 
+
+```json
+
+test("테스트 코드", () => {
+	expect(validatePassword("password")).toBe(false)
+})
+
+```
+
+```json
+
+test("테스트 코드", () => {
+	// Arrange: 준비 - 
+	const input = "password";
+	
+	// Act: 실행 - 
+	const result = validatePassword(input);
+	
+	// Assert: 검증 
+	expect(result).toBe(false)
+})
+
+```
+
+코드의 길이가 더 늘어나지만 **가독성**과 **유지보수성**이 뛰어나다.
+A: arrange로 변수나 후에 나올 사전 작업들을 준비한다. 
+A: act로 말그대로 테스트에 사용될 함수를 실행하고 변수에 넣는다. 
+A: assert로 테스트 함수를 쓰면서 실제 값이 맞는지 검증한다. 
+
+단 유연하게 사용해야되는데 throw 테스트시엔 act와 assert를 같이 묶어 사용할 수 도 있다. 
+
+```json
+
+test("음수 할인에 대해 오류를 발생시키는지 확인", () => {
+    const price = 1000;
+    const discount = -10;
+
+    expect(() => calculateDiscountedPrice(price, discount)).toThrow("입력값이 유효하지 않습니다. 가격과 할인율은 0 이상이어야 하며, 할인율은 100 이하이어야 합니다."
+    );
+
+});
+
+```
+
