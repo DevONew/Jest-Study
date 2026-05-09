@@ -78,3 +78,30 @@ test("1+2는 3이 되어야함", () => { // 2. test("",() => {})로 테스트할
 ```
 expect에 넣은 값은 실제 함수가 실행 되었을때의 값, 테스트 해야될 값이고 matcher안 값은 말그대로 비교해야할 값 기대하는 값, 이래야하는 예상값이다. 
 
+## matcher 함수
+
+`toBe()`는 가장 기본적인 함수지만 객체 비교시엔 에러가 난다. 주로 원시값을 비교할때 사용. 
+이 경우에는 `toEqual()`를 사용하면 된다. 깊은 동등 비교 객체,배열시 사용한다.(원시값도 되긴함) 더 strict한 비교도 있는데 `toStrictEqual()`도 있다. 
+
+부정 matcher도 있는데 `not`을 matcher함수 앞에 사용하면 된다. 
+
+`toThrow`예외 발생 테스트 함수. 사용 문법은 크게 두가지가 있다. 
+
+```json
+
+function throwError() {
+  throw new Error("에러가 발생했습니다.");
+}
+
+test("함수가 에러를 발생시켜야 함", () => {
+  expect(throwError).toThrow();
+  expect(() => throwError()).toThrow("에러가 발생했습니다.");
+  expect(() => throwError()).toThrow(/에러/);
+});
+
+```
+함수 참조를 사용하여 넘겨주어야한다. 
+
+`expect(throwError).toThrow();` : 인자가 없을 때만 가능
+`expect(() => throwError()).toThrow("에러가 발생했습니다.");` : 인자 없을때 있을때 둘다 가능
+

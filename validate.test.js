@@ -1,4 +1,3 @@
-// validate.test.js
 const { validatePassword, validateEmail } = require("./validate");
 
 describe("validate 모듈 테스트", () => {

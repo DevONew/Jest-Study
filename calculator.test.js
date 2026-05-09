@@ -64,3 +64,9 @@ describe("calculator 함수", () => {
 
 })
 
+describr("함수 오류", () => {
+
+    test("유효하지 않은 할인율을 넣을 시 오류가 나는지 확인", () =>{
+        expect(() => calculateDiscountedPrice(3000, -10)).toThrow("입력값이 유효하지 않습니다. 가격과 할인율은 0 이상이어야 하며, 할인율은 100 이하이어야 합니다.");
+    })
+})
