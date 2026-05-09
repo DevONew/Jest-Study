@@ -1,7 +1,5 @@
-// sum.js
-
-function sum(a, b) {
+function sum( a, b) {
   return a + b;
 }
 
-module.exports = { sum };
+module.exports = { sum }; //commonJS 문법 
